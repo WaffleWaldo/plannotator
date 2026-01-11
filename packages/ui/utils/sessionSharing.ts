@@ -8,15 +8,15 @@
 import { getSupabase, isSupabaseConfigured, DbSession, DbAnnotation } from '../lib/supabase';
 import { Annotation, AnnotationType, CollaborativeSession } from '../types';
 
+// Always use the deployed portal URL for shareable session links
+const PORTAL_URL = 'https://plannotator-portal.vercel.app';
+
 /**
  * Generate a shareable session URL
- * Uses current host for local testing, falls back to production URL
+ * Always points to the deployed portal so URLs are shareable
  */
 export function getSessionUrl(sessionId: string): string {
-  const baseUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}/session`
-    : 'https://share.plannotator.ai/session';
-  return `${baseUrl}/${sessionId}`;
+  return `${PORTAL_URL}/session/${sessionId}`;
 }
 
 /**
